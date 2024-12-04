@@ -1,3 +1,10 @@
+LineData onBoot[4] = {
+  { nullptr, -1, 3, ACK_INM },
+  { "Arduino booted", -1, 3, ACK_AR2 },
+  { nullptr, -1, 3, ACK_AR3 },
+  { nullptr, -1, 3, ACK_AR4 }
+};
+
 LineData welcome[4] = {
   { "Welcome!", -1, 3, ACK_INM },
   { "To Veramon", -1, 3, ACK_AR2 },
@@ -26,4 +33,4 @@ LineData goodbye[4] = {
   { "See you soon!", -1, 3, ACK_AR4 }
 };
 
-LineData* dataSets[] = { nullptr, welcome, connectionLost, oilTemp, goodbye };
+LineData* dataSets[] = { nullptr, onBoot, welcome, connectionLost, oilTemp, goodbye };

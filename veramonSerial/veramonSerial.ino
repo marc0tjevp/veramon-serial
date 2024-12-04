@@ -5,6 +5,7 @@
 
 void setup() {
   Serial.begin(9600, SERIAL_8N1);  // Use 8 data bits, no parity, 1 stop bit
+  sendMultilineInstruction(dataSets[1]);
   Serial.println("Interface awaits event");
 }
 
