@@ -1,20 +1,24 @@
 #include "definitions.h"
 #include "debug.h"
 #include "instructions.h"
+#include "events.h"
 
 void setup() {
   Serial.begin(9600, SERIAL_8N1);  // Use 8 data bits, no parity, 1 stop bit
+  Serial.println("Interface awaits event");
 }
 
 void loop() {
-  LineData lines[4] = {
-    { "Veramon Serial", -1, 3, ACK_INM },
-    { nullptr, 0, 3, ACK_AR2 },
-    { "Extended version", -1, 3, ACK_AR3 },
-    { nullptr, 0, 3, ACK_AR4 }
-  };
+  if (Serial.available() > 0) {
+    int event = Serial.parseInt();
 
-  sendMultilineInstruction(lines);
+    if (event > 0 && event < (sizeof(dataSets) / sizeof(dataSets[0]))) {
+      Serial.println(event);
+
+      // Send the selected LineData array
+      sendMultilineInstruction(dataSets[event]);
+    }
+  }
 
   delay(500);
 }
